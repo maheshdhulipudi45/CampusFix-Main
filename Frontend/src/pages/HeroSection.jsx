@@ -842,11 +842,11 @@ const HeroSection = () => {
       style={{
         backgroundImage: `url('./hbg_campus.jpg')`,
         backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundPosition: "center 25%",
       }}
     >
       {/* HIGH-TECH TECH BLUEPRINT OVERLAYS */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/90 via-blue-950/65 to-zinc-950/98 mix-blend-multiply" />
+      <div className="absolute inset-0 bg-zinc-950/75 lg:bg-gradient-to-b lg:from-zinc-950/90 lg:via-blue-950/60 lg:to-zinc-950/98 lg:mix-blend-multiply" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,82,255,0.15)_0%,transparent_70%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
@@ -874,12 +874,13 @@ const HeroSection = () => {
                 text-3xl sm:text-4xl xl:text-5xl
                 font-extrabold uppercase
                 tracking-[0.14em] leading-snug
-                font-['Inter']"
+                font-['Inter'] drop-shadow-md"
             >
-              ELECTRICAL ISSUE <br />
-              MANAGEMENT SYSTEM <br />
-              <span className="bg-gradient-to-r from-blue-400 to-indigo-400 
-                bg-clip-text text-transparent">
+              <span className="text-white">ELECTRICAL ISSUE</span> <br />
+              <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-indigo-400 bg-clip-text text-transparent">
+                MANAGEMENT SYSTEM
+              </span> <br />
+              <span className="text-zinc-300">
                 ADITYA CAMPUS
               </span>
             </h1>
@@ -906,7 +907,7 @@ const HeroSection = () => {
 
               <button
                 onClick={() => navigate("/my-complaints")}
-                className="flex-1 sm:flex-initial text-center rounded-xl border border-[#0052FF] bg-transparent px-4 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0052FF] hover:bg-[#0052FF]/5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] h-12 flex items-center justify-center min-w-0"
+                className="flex-1 sm:flex-initial text-center rounded-xl border border-[#0052FF]/50 bg-[#121824] px-4 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-blue-400 hover:bg-[#1e293b] hover:text-white transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] h-12 flex items-center justify-center min-w-0"
               >
                 Track Complaint
               </button>
