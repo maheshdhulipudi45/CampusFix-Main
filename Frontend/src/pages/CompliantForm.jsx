@@ -11,6 +11,29 @@ import {
 } from "lucide-react";
 import "react-toastify/dist/ReactToastify.css";
 
+
+const FloatingInput = ({ label, name, type = "text", required = true, icon, value, onChange }) => (
+  <div className="relative h-[60px] w-full">
+    <input
+      type={type}
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder=" "
+      className="w-full h-full pt-4 pb-1 pl-11 pr-4 rounded-2xl border border-zinc-200 bg-white text-sm text-zinc-900 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all peer"
+      required={required}
+    />
+    {icon && (
+      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">
+        {icon}
+      </div>
+    )}
+    <label className="absolute left-11 top-1/2 -translate-y-1/2 text-xs font-semibold text-zinc-400 pointer-events-none transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:-translate-y-0 peer-focus:text-[10px] peer-focus:text-blue-500 peer-[:not(:placeholder-shown)]:top-3 peer-[:not(:placeholder-shown)]:-translate-y-0 peer-[:not(:placeholder-shown)]:text-[10px]">
+      {label}
+    </label>
+  </div>
+);
+
 const Complaint = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -187,28 +210,7 @@ const Complaint = () => {
     { id: "switch", label: "Switch Board", icon: <ShieldCheck className="h-5 w-5" /> },
   ];
 
-  // Reusable Floating label input (60px height)
-  const FloatingInput = ({ label, name, type = "text", required = true, icon }) => (
-    <div className="relative h-[60px] w-full">
-      <input
-        type={type}
-        name={name}
-        value={formData[name]}
-        onChange={handleChange}
-        placeholder=" "
-        className="w-full h-full pt-4 pb-1 pl-11 pr-4 rounded-2xl border border-zinc-200 bg-white text-sm text-zinc-900 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all peer"
-        required={required}
-      />
-      {icon && (
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400">
-          {icon}
-        </div>
-      )}
-      <label className="absolute left-11 top-1/2 -translate-y-1/2 text-xs font-semibold text-zinc-400 pointer-events-none transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:-translate-y-0 peer-focus:text-[10px] peer-focus:text-blue-500 peer-[:not(:placeholder-shown)]:top-3 peer-[:not(:placeholder-shown)]:-translate-y-0 peer-[:not(:placeholder-shown)]:text-[10px]">
-        {label}
-      </label>
-    </div>
-  );
+
 
   return (
     <div className="min-h-[calc(100vh-80px)] bg-gradient-to-br from-zinc-50 via-zinc-100 to-zinc-50 flex flex-col items-center justify-center py-12 px-6 font-jakarta relative overflow-hidden">
@@ -356,9 +358,9 @@ const Complaint = () => {
                     </div>
 
                     <div className="space-y-4">
-                      <FloatingInput label="Full Name" name="fullName" icon={<UserRound className="h-4 w-4" />} />
-                      <FloatingInput label="Official Email Address" name="email" type="email" icon={<Mail className="h-4 w-4" />} />
-                      <FloatingInput label="Mobile Number" name="phoneNumber" type="tel" icon={<Phone className="h-4 w-4" />} />
+                      <FloatingInput label="Full Name" name="fullName" value={formData.fullName} onChange={handleChange} icon={<UserRound className="h-4 w-4" />} />
+                      <FloatingInput label="Official Email Address" name="email" type="email" value={formData.email} onChange={handleChange} icon={<Mail className="h-4 w-4" />} />
+                      <FloatingInput label="Mobile Number" name="phoneNumber" type="tel" value={formData.phoneNumber} onChange={handleChange} icon={<Phone className="h-4 w-4" />} />
                     </div>
 
                     <button
@@ -459,7 +461,7 @@ const Complaint = () => {
                           </div>
 
                           <div className="col-span-2">
-                            <FloatingInput label="Room Number" name="roomNo" icon={<Building className="h-4 w-4" />} />
+                            <FloatingInput label="Room Number" name="roomNo" value={formData.roomNo} onChange={handleChange} icon={<Building className="h-4 w-4" />} />
                           </div>
                         </div>
                       )}
@@ -484,7 +486,7 @@ const Complaint = () => {
                             <label className="absolute left-4 top-2.5 text-[10px] font-bold text-blue-500 uppercase">Building Name</label>
                           </div>
 
-                          <FloatingInput label="Room / Lab Number" name="roomNo" icon={<Building className="h-4 w-4" />} />
+                          <FloatingInput label="Room / Lab Number" name="roomNo" value={formData.roomNo} onChange={handleChange} icon={<Building className="h-4 w-4" />} />
                         </div>
                       )}
 

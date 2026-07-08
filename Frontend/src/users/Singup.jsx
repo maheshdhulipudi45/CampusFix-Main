@@ -12,6 +12,28 @@ const allowedAdminEmails = [
   "24p31f00h5@acet.ac.in",
 ];
 
+
+const FloatingInput = ({ label, name, type = "text", value, onChange, icon, children }) => (
+  <div className="relative h-14 w-full">
+    <input
+      type={type}
+      name={name}
+      value={value}
+      onChange={onChange}
+      placeholder=" "
+      className="w-full h-full pt-4 pb-1 pl-11 pr-10 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all peer"
+      required
+    />
+    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none">
+      {icon}
+    </div>
+    <label className="absolute left-11 top-1/2 -translate-y-1/2 text-xs font-semibold text-zinc-400 pointer-events-none transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:top-2.5 peer-focus:-translate-y-0 peer-focus:text-[10px] peer-focus:text-blue-500 peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:-translate-y-0 peer-[:not(:placeholder-shown)]:text-[10px]">
+      {label}
+    </label>
+    {children}
+  </div>
+);
+
 const SignUp = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -134,27 +156,6 @@ const SignUp = () => {
       setIsLoading(false);
     }
   };
-
-  const FloatingInput = ({ label, name, type = "text", value, onChange, icon, children }) => (
-    <div className="relative h-14 w-full">
-      <input
-        type={type}
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder=" "
-        className="w-full h-full pt-4 pb-1 pl-11 pr-10 rounded-xl border border-zinc-200 bg-white text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all peer"
-        required
-      />
-      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none">
-        {icon}
-      </div>
-      <label className="absolute left-11 top-1/2 -translate-y-1/2 text-xs font-semibold text-zinc-400 pointer-events-none transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-focus:top-2.5 peer-focus:-translate-y-0 peer-focus:text-[10px] peer-focus:text-blue-500 peer-[:not(:placeholder-shown)]:top-2.5 peer-[:not(:placeholder-shown)]:-translate-y-0 peer-[:not(:placeholder-shown)]:text-[10px]">
-        {label}
-      </label>
-      {children}
-    </div>
-  );
 
   return (
     <div className="min-h-[calc(100vh-80px)] flex flex-col md:flex-row bg-[#F8FAFC] font-jakarta relative overflow-hidden">
