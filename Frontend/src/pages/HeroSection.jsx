@@ -840,7 +840,7 @@ const HeroSection = () => {
     <section
       className="relative min-h-screen w-full text-white bg-zinc-950"
       style={{
-        backgroundImage: `url('./hbg1.png')`,
+        backgroundImage: `url('./hbg_campus.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
