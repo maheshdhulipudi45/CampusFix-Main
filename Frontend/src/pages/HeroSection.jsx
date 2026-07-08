@@ -855,7 +855,7 @@ const HeroSection = () => {
         variants={container}
         initial="hidden"
         animate="visible"
-        className="relative z-10 mx-auto max-w-7xl px-6 pt-32 pb-24"
+        className="relative z-10 mx-auto max-w-7xl px-6 pt-16 pb-20 md:pt-20 md:pb-24"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
