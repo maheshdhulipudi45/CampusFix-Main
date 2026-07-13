@@ -158,56 +158,16 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-80px)] flex flex-col md:flex-row bg-[#F8FAFC] font-jakarta relative overflow-hidden">
+    <div className="min-h-[calc(100vh-80px)] flex items-center justify-center bg-[#F8FAFC] font-jakarta relative overflow-hidden py-12">
       <ToastContainer position="top-right" autoClose={2000} hideProgressBar />
 
-      {/* LEFT COLUMN: BEAUTIFUL ILLUSTRATION SPLIT */}
-      <div
-        className="hidden md:flex md:w-1/2 bg-cover bg-center relative flex-col justify-between p-12 text-white"
-        style={{
-          backgroundImage: `url('./hbg1.png')`,
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/90 via-indigo-900/80 to-zinc-950/90" />
-
-        <div className="relative z-10 flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 backdrop-blur text-white border border-white/10 font-bold">
-            <Zap className="h-5 w-5 fill-white stroke-none" />
-          </div>
-          <span className="text-lg font-extrabold tracking-tight">CampusFix</span>
-        </div>
-
-        <div className="relative z-10 max-w-md my-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="rounded-3xl border border-white/15 bg-white/5 backdrop-blur-md p-8 shadow-2xl space-y-4"
-          >
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/10 px-3.5 py-1 text-xs font-semibold text-blue-200">
-              <Building2 className="h-3.5 w-3.5 text-blue-300" /> V2.0 Enterprise Desk
-            </span>
-            <h2 className="text-2xl font-extrabold uppercase tracking-wide leading-tight">
-              Create Your Campus Account
-            </h2>
-            <p className="text-xs text-zinc-300 leading-relaxed">
-              Verify your student roll number or whitelisted administrator email tags to access services.
-            </p>
-          </motion.div>
-        </div>
-
-        <div className="relative z-10 text-[10px] text-zinc-400 font-semibold tracking-wider uppercase">
-          © {new Date().getFullYear()} Aditya Institutions
-        </div>
-      </div>
-
-      {/* RIGHT COLUMN: SIGNUP CARD FORM */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-6 sm:p-12 relative">
+      {/* CENTERED SIGNUP CARD FORM */}
+      <div className="w-full flex items-center justify-center p-6 sm:p-12 relative">
         <div className="absolute top-1/4 right-1/4 h-80 w-80 rounded-full bg-blue-500/5 blur-3xl pointer-events-none" />
 
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
           className="w-full max-w-md bg-white rounded-3xl border border-zinc-200/60 shadow-xl p-8 sm:p-10 relative z-10"
         >

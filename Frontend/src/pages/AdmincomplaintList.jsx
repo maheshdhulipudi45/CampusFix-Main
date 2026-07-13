@@ -139,7 +139,7 @@ const AdminComplaintList = () => {
                     <div className="flex flex-wrap items-center justify-between gap-4 mb-5">
                       <div className="flex items-center gap-3">
                         <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 uppercase tracking-wide">
-                          TICKET-{index + 1}
+                          {c.complaintId || `TICKET-${index + 1}`}
                         </span>
                         <span className={`flex items-center gap-1 text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${styleObj.badge}`}>
                           {styleObj.icon}

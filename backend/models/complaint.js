@@ -22,6 +22,7 @@ const complaintSchema = new mongoose.Schema(
     floor: String,
     roomNo: String,
     collegeBuilding: String,
+    complaintId: String,
     complaintCategory: String,
     issueType: String,
     problemDescription: String,
@@ -35,6 +36,16 @@ const complaintSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+complaintSchema.pre("save", async function(next) {
+  if (!this.complaintId) {
+    const count = await mongoose.model("Complaint").countDocuments();
+    const year = new Date().getFullYear();
+    const sequence = String(count + 1).padStart(6, "0");
+    this.complaintId = `CF-${year}-${sequence}`;
+  }
+  next();
+});
 
 export default mongoose.model("Complaint", complaintSchema);
 

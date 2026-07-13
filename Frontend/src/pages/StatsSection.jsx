@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, Zap, Clock, Users } from "lucide-react";
+import { CheckCircle2, Zap, Clock, Users, FileText } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 25 },
@@ -18,34 +18,63 @@ const container = {
   },
 };
 
-const stats = [
-  {
-    icon: <CheckCircle2 className="h-6 w-6 text-blue-600" />,
-    value: "5,400+",
-    label: "Issues Resolved",
-    desc: "Defects successfully fixed and signed off.",
-  },
-  {
-    icon: <Zap className="h-6 w-6 text-purple-600" />,
-    value: "98.7%",
-    label: "Resolution Rate",
-    desc: "High success and satisfaction percentage.",
-  },
-  {
-    icon: <Clock className="h-6 w-6 text-orange-600" />,
-    value: "< 2 Hrs",
-    label: "Avg. Dispatch Time",
-    desc: "Rapid technician site arrival response.",
-  },
-  {
-    icon: <Users className="h-6 w-6 text-emerald-600" />,
-    value: "12,000+",
-    label: "Students Served",
-    desc: "Across all Aditya college blocks and hostels.",
-  },
-];
-
 const StatsSection = () => {
+  const [statsData, setStatsData] = useState({
+    users: 0,
+    total: 0,
+    pending: 0,
+    inProgress: 0,
+    resolved: 0,
+  });
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/complaints/stats`)
+      .then((res) => res.json())
+      .then((data) => {
+        setStatsData({
+          users: data.users || 0,
+          total: data.total || 0,
+          pending: data.pending || 0,
+          inProgress: data.inProgress || 0,
+          resolved: data.resolved || 0,
+        });
+      })
+      .catch((err) => console.error("Error fetching stats:", err));
+  }, []);
+
+  const stats = [
+    {
+      icon: <Users className="h-6 w-6 text-emerald-600" />,
+      value: statsData.users,
+      label: "Total Registered Users",
+      desc: "Count of all registered user accounts.",
+    },
+    {
+      icon: <FileText className="h-6 w-6 text-blue-600" />,
+      value: statsData.total,
+      label: "Total Complaints",
+      desc: "Total defects submitted to the platform.",
+    },
+    {
+      icon: <Clock className="h-6 w-6 text-orange-600" />,
+      value: statsData.pending,
+      label: "Pending Complaints",
+      desc: "Issues currently awaiting review.",
+    },
+    {
+      icon: <Zap className="h-6 w-6 text-purple-600" />,
+      value: statsData.inProgress,
+      label: "In Progress",
+      desc: "Issues actively being worked on.",
+    },
+    {
+      icon: <CheckCircle2 className="h-6 w-6 text-emerald-600" />,
+      value: statsData.resolved,
+      label: "Resolved Complaints",
+      desc: "Defects successfully fixed and closed.",
+    },
+  ];
+
   return (
     <section className="py-24 px-6 bg-zinc-50 border-t border-zinc-200/50 font-jakarta relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
@@ -69,7 +98,7 @@ const StatsSection = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-7xl mx-auto"
         >
           {stats.map((stat, idx) => (
             <motion.div

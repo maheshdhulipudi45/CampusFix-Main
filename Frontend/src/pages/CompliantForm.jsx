@@ -230,7 +230,7 @@ const Complaint = () => {
           <div className="overflow-hidden relative w-full h-5">
             <div
               className="absolute whitespace-nowrap text-rose-700 text-xs font-semibold"
-              style={{ animation: "marquee 18s linear infinite" }}
+              style={{ animation: "marquee 35s linear infinite" }}
             >
               Please submit complaints responsibly. False, prank, or duplicate submissions will be flagged for administrative disciplinary review.
             </div>
@@ -565,12 +565,12 @@ const Complaint = () => {
                             <option value="Fan">Fan</option>
                             <option value="Tube Light">Tube Light</option>
                             <option value="Bulb">Bulb</option>
-                            <option value="Switch Board">Switch Board</option>
-                            <option value="Power Socket">Power Socket</option>
+                            <option value="Switch">Switch</option>
+                            <option value="Socket">Socket</option>
                             <option value="Wiring">Wiring</option>
-                            <option value="Power Failure">Power Failure</option>
-                            <option value="Fuse">Fuse</option>
                             <option value="MCB">MCB</option>
+                            <option value="Fuse">Fuse</option>
+                            <option value="Power Failure">Power Failure</option>
                             <option value="Other">Other</option>
                           </select>
                           <Settings className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400 pointer-events-none" />
@@ -589,14 +589,14 @@ const Complaint = () => {
                           >
                             <option value="">Select Plumbing Issue</option>
                             <option value="Water Leakage">Water Leakage</option>
-                            <option value="Water Tap">Water Tap</option>
                             <option value="Pipe Leakage">Pipe Leakage</option>
+                            <option value="Water Tap">Water Tap</option>
                             <option value="Water Cooler">Water Cooler</option>
                             <option value="Drinking Water">Drinking Water</option>
                             <option value="Washroom">Washroom</option>
                             <option value="Drainage">Drainage</option>
-                            <option value="Toilet Flush">Toilet Flush</option>
                             <option value="Water Tank">Water Tank</option>
+                            <option value="Toilet Flush">Toilet Flush</option>
                             <option value="Other">Other</option>
                           </select>
                           <Settings className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400 pointer-events-none" />
@@ -614,15 +614,13 @@ const Complaint = () => {
                             required
                           >
                             <option value="">Select Other Issue</option>
-                            <option value="Furniture Damage">Furniture Damage</option>
-                            <option value="Broken Chair">Broken Chair</option>
-                            <option value="Broken Desk">Broken Desk</option>
+                            <option value="Furniture">Furniture</option>
+                            <option value="Cleaning">Cleaning</option>
+                            <option value="Civil">Civil</option>
+                            <option value="Internet">Internet</option>
                             <option value="Door">Door</option>
                             <option value="Window">Window</option>
-                            <option value="Ceiling Damage">Ceiling Damage</option>
-                            <option value="Wall Damage">Wall Damage</option>
-                            <option value="Cleaning Issue">Cleaning Issue</option>
-                            <option value="Internet Issue">Internet Issue</option>
+                            <option value="Ceiling">Ceiling</option>
                             <option value="Other">Other</option>
                           </select>
                           <Settings className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400 pointer-events-none" />

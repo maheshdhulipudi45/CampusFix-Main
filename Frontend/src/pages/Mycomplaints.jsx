@@ -144,7 +144,10 @@ const MyComplaints = () => {
                     {/* TOP ROW */}
                     <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
                       <div>
-                        <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 uppercase tracking-wide">
+                        <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 uppercase tracking-wide mr-2">
+                          {c.complaintId || "TICKET"}
+                        </span>
+                        <span className="text-[10px] font-bold text-zinc-500 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-200 uppercase tracking-wide">
                           {c.issueType}
                         </span>
                         <h3 className="text-base font-bold text-zinc-950 mt-1.5 capitalize">
