@@ -38,6 +38,7 @@ export const createComplaint = async (req, res) => {
             `
         }
 
+        <p><b>Category:</b> ${complaint.complaintCategory || "N/A"}</p>
         <p><b>Issue Type:</b> ${complaint.issueType}</p>
         <p><b>Description:</b> ${complaint.problemDescription}</p>
 
@@ -84,6 +85,7 @@ export const updateComplaintStatus = async (req, res) => {
         <p>Your complaint has been updated. Details below:</p>
 
         <ul>
+          ${complaint.complaintCategory ? `<li><b>Category:</b> ${complaint.complaintCategory}</li>` : ""}
           <li><b>Issue:</b> ${complaint.issueType}</li>
           <li><b>Location:</b> ${complaint.location}</li>
           <li><b>Priority:</b> ${complaint.priorityLevel}</li>

@@ -58,7 +58,8 @@ const Complaint = () => {
     floor: "",
     roomNo: "",
     collegeBuilding: "",
-    issueType: "", // Category selected via clickable cards
+    complaintCategory: "",
+    issueType: "",
     problemDescription: "",
   });
 
@@ -75,8 +76,12 @@ const Complaint = () => {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const selectCategory = (cat) => {
-    setFormData({ ...formData, issueType: cat });
+  const handleCategoryChange = (e) => {
+    setFormData({
+      ...formData,
+      complaintCategory: e.target.value,
+      issueType: "",
+    });
   };
 
   const simulateProgress = (file) => {
@@ -145,8 +150,12 @@ const Complaint = () => {
   };
 
   const validateStep3 = () => {
+    if (!formData.complaintCategory) {
+      toast.error("Please select a complaint category");
+      return false;
+    }
     if (!formData.issueType) {
-      toast.error("Please select a problem category card");
+      toast.error("Please select an issue type");
       return false;
     }
     return true;
@@ -200,15 +209,7 @@ const Complaint = () => {
     { label: "Review", icon: <ClipboardCheck className="h-4 w-4" />, id: 5 },
   ];
 
-  // Category Cards Configuration
-  const categories = [
-    { id: "fan", label: "Fan Problem", icon: <Wind className="h-5 w-5" /> },
-    { id: "light", label: "Light Problem", icon: <Lightbulb className="h-5 w-5" /> },
-    { id: "ac", label: "AC malfunction", icon: <Layers className="h-5 w-5" /> },
-    { id: "outlet", label: "Power Outlet", icon: <Zap className="h-5 w-5" /> },
-    { id: "wiring", label: "Wiring defect", icon: <Settings className="h-5 w-5" /> },
-    { id: "switch", label: "Switch Board", icon: <ShieldCheck className="h-5 w-5" /> },
-  ];
+
 
 
 
@@ -511,7 +512,7 @@ const Complaint = () => {
                   </motion.div>
                 )}
 
-                {/* STEP 3: CATEGORY SELECTION CARDS */}
+                {/* STEP 3: CATEGORY SELECTION DROPDOWNS */}
                 {step === 3 && (
                   <motion.div
                     key="step3"
@@ -523,35 +524,112 @@ const Complaint = () => {
                     <div className="border-b border-zinc-100 pb-4 flex items-center justify-between">
                       <div>
                         <h3 className="text-base font-extrabold text-zinc-950">Select Defect Type</h3>
-                        <p className="text-xs text-zinc-400 mt-1">Select the card matching the electrical issue.</p>
+                        <p className="text-xs text-zinc-400 mt-1">Select the category and issue type matching the defect.</p>
                       </div>
                       <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
                         <Bolt className="h-5 w-5" />
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                      {categories.map((cat) => {
-                        const active = formData.issueType === cat.id;
-                        return (
-                          <div
-                            key={cat.id}
-                            onClick={() => selectCategory(cat.id)}
-                            className={`cursor-pointer rounded-[20px] p-5 border text-center flex flex-col items-center justify-center gap-3 transition-all duration-300 hover:-translate-y-1 ${
-                              active
-                                ? "bg-blue-50/80 border-blue-500 text-blue-600 shadow-md shadow-blue-500/10"
-                                : "bg-white border-zinc-200/80 text-zinc-500 hover:border-zinc-300 hover:text-zinc-800"
-                            }`}
+                    <div className="space-y-4">
+                      
+                      {/* Dropdown 1: Complaint Category */}
+                      <div className="relative h-[60px] w-full">
+                        <select
+                          name="complaintCategory"
+                          value={formData.complaintCategory}
+                          onChange={handleCategoryChange}
+                          className="w-full h-full pt-4 pb-1 pl-11 pr-4 rounded-2xl border border-zinc-200 bg-white text-sm text-zinc-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all appearance-none"
+                          required
+                        >
+                          <option value="">Select Complaint Category</option>
+                          <option value="Electrical">Electrical</option>
+                          <option value="Plumbing">Plumbing</option>
+                          <option value="Others">Others</option>
+                        </select>
+                        <Layers className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400 pointer-events-none" />
+                        <label className="absolute left-11 top-2.5 text-[10px] font-bold text-blue-500 uppercase">Complaint Category</label>
+                      </div>
+
+                      {/* Dropdown 2: Dependent Issue Type */}
+                      {formData.complaintCategory === "Electrical" && (
+                        <div className="relative h-[60px] w-full">
+                          <select
+                            name="issueType"
+                            value={formData.issueType}
+                            onChange={handleChange}
+                            className="w-full h-full pt-4 pb-1 pl-11 pr-4 rounded-2xl border border-zinc-200 bg-white text-sm text-zinc-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all appearance-none"
+                            required
                           >
-                            <div className={`h-11 w-11 rounded-xl flex items-center justify-center border transition-all ${
-                              active ? "bg-blue-600 text-white border-blue-600" : "bg-zinc-50 border-zinc-100 text-zinc-400"
-                            }`}>
-                              {cat.icon}
-                            </div>
-                            <span className="text-xs font-bold tracking-tight">{cat.label}</span>
-                          </div>
-                        );
-                      })}
+                            <option value="">Select Electrical Issue</option>
+                            <option value="Fan">Fan</option>
+                            <option value="Tube Light">Tube Light</option>
+                            <option value="Bulb">Bulb</option>
+                            <option value="Switch Board">Switch Board</option>
+                            <option value="Power Socket">Power Socket</option>
+                            <option value="Wiring">Wiring</option>
+                            <option value="Power Failure">Power Failure</option>
+                            <option value="Fuse">Fuse</option>
+                            <option value="MCB">MCB</option>
+                            <option value="Other">Other</option>
+                          </select>
+                          <Settings className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400 pointer-events-none" />
+                          <label className="absolute left-11 top-2.5 text-[10px] font-bold text-blue-500 uppercase">Electrical Issue</label>
+                        </div>
+                      )}
+
+                      {formData.complaintCategory === "Plumbing" && (
+                        <div className="relative h-[60px] w-full">
+                          <select
+                            name="issueType"
+                            value={formData.issueType}
+                            onChange={handleChange}
+                            className="w-full h-full pt-4 pb-1 pl-11 pr-4 rounded-2xl border border-zinc-200 bg-white text-sm text-zinc-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all appearance-none"
+                            required
+                          >
+                            <option value="">Select Plumbing Issue</option>
+                            <option value="Water Leakage">Water Leakage</option>
+                            <option value="Water Tap">Water Tap</option>
+                            <option value="Pipe Leakage">Pipe Leakage</option>
+                            <option value="Water Cooler">Water Cooler</option>
+                            <option value="Drinking Water">Drinking Water</option>
+                            <option value="Washroom">Washroom</option>
+                            <option value="Drainage">Drainage</option>
+                            <option value="Toilet Flush">Toilet Flush</option>
+                            <option value="Water Tank">Water Tank</option>
+                            <option value="Other">Other</option>
+                          </select>
+                          <Settings className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400 pointer-events-none" />
+                          <label className="absolute left-11 top-2.5 text-[10px] font-bold text-blue-500 uppercase">Plumbing Issue</label>
+                        </div>
+                      )}
+
+                      {formData.complaintCategory === "Others" && (
+                        <div className="relative h-[60px] w-full">
+                          <select
+                            name="issueType"
+                            value={formData.issueType}
+                            onChange={handleChange}
+                            className="w-full h-full pt-4 pb-1 pl-11 pr-4 rounded-2xl border border-zinc-200 bg-white text-sm text-zinc-500 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all appearance-none"
+                            required
+                          >
+                            <option value="">Select Other Issue</option>
+                            <option value="Furniture Damage">Furniture Damage</option>
+                            <option value="Broken Chair">Broken Chair</option>
+                            <option value="Broken Desk">Broken Desk</option>
+                            <option value="Door">Door</option>
+                            <option value="Window">Window</option>
+                            <option value="Ceiling Damage">Ceiling Damage</option>
+                            <option value="Wall Damage">Wall Damage</option>
+                            <option value="Cleaning Issue">Cleaning Issue</option>
+                            <option value="Internet Issue">Internet Issue</option>
+                            <option value="Other">Other</option>
+                          </select>
+                          <Settings className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400 pointer-events-none" />
+                          <label className="absolute left-11 top-2.5 text-[10px] font-bold text-blue-500 uppercase">Other Issue</label>
+                        </div>
+                      )}
+
                     </div>
 
                     <div className="flex gap-3 pt-4 border-t border-zinc-100">
@@ -704,8 +782,8 @@ const Complaint = () => {
                         </span>
                       </div>
                       <div>
-                        <span className="font-bold text-zinc-400 uppercase tracking-wider block">Category</span>
-                        <span className="text-zinc-800 capitalize mt-1 block font-bold">{formData.issueType}</span>
+                        <span className="font-bold text-zinc-400 uppercase tracking-wider block">Category & Issue</span>
+                        <span className="text-zinc-800 capitalize mt-1 block font-bold">{formData.complaintCategory} - {formData.issueType}</span>
                       </div>
                     </div>
 

@@ -22,7 +22,7 @@ const complaintSchema = new mongoose.Schema(
     floor: String,
     roomNo: String,
     collegeBuilding: String,
-
+    complaintCategory: String,
     issueType: String,
     problemDescription: String,
 
